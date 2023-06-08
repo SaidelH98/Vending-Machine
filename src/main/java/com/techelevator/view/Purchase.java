@@ -7,16 +7,6 @@ import java.util.Scanner;
 
 public class Purchase {
 
-    public static final BigDecimal QUARTER = new BigDecimal(0.25);
-    public static final BigDecimal DIME = new BigDecimal(0.1);
-    public static final BigDecimal NICKEL = new BigDecimal(0.05);
-    public static final BigDecimal PENNY = new BigDecimal(0.01);
-
-    private static BigDecimal quarters;
-    private static BigDecimal dimes;
-    private static BigDecimal nickels;
-    private static BigDecimal pennies;
-
     private static BigDecimal moneyProvided;
     private static BigDecimal change;
 
@@ -106,28 +96,16 @@ public class Purchase {
     }
 
     public static void createChange(){
-        MathContext m = new MathContext(0);
         change = getMoneyProvided();
-
-        quarters = new BigDecimal(String.valueOf(change.divide(QUARTER))).setScale(0, RoundingMode.FLOOR);
-        change = change.subtract(new BigDecimal(String.valueOf(quarters.multiply(QUARTER))));
-
-        if (change.compareTo(DIME) > 0){
-            dimes = change.divide(DIME).setScale(0, RoundingMode.FLOOR);
-            change = change.subtract(new BigDecimal(String.valueOf(dimes.multiply(DIME))));
-        }
-
-        if (change.compareTo(NICKEL) > 0) {
-            nickels = new BigDecimal(String.valueOf(change.divide(NICKEL))).setScale(0, RoundingMode.FLOOR);
-            change = change.subtract(new BigDecimal(String.valueOf(nickels.multiply(NICKEL))));
-        }
-
-        if (change.compareTo(PENNY) > 0) {
-            pennies = new BigDecimal(String.valueOf(change.divide(PENNY))).setScale(0, RoundingMode.FLOOR);
-            change = change.subtract(new BigDecimal(String.valueOf(pennies.multiply(PENNY))));
-        }
-
-        System.out.println("Your change is:\n" + quarters + " quarters\n" + dimes + " dimes\n" + nickels + " nickels\n" + pennies + " pennies");
+        double dblChange = change.doubleValue();
+        int intChange = (int)(dblChange * 100);
+        int quarters = (int)(Math.floor(intChange / 25));
+        intChange %= 25;
+        int dimes = (int)(Math.floor(intChange / 10));
+        intChange %= 10;
+        int nickels = (int)(Math.floor(intChange / 5));
+        intChange %= 5;
+        System.out.println("Your change is " + quarters + " quarters, " + dimes + " dime, " + nickels + " nickels, and " + intChange + " pennies.");
     }
 
 }
