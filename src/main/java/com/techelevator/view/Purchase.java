@@ -1,9 +1,21 @@
 package com.techelevator.view;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Scanner;
 
 public class Purchase {
+
+    public static final BigDecimal QUARTER = new BigDecimal(0.25);
+    public static final BigDecimal DIME = new BigDecimal(0.1);
+    public static final BigDecimal NICKEL = new BigDecimal(0.05);
+    public static final BigDecimal PENNY = new BigDecimal(0.01);
+
+    private static BigDecimal quarters;
+    private static BigDecimal dimes;
+    private static BigDecimal nickels;
+    private static BigDecimal pennies;
 
     private static BigDecimal moneyProvided;
     private static BigDecimal change;
@@ -91,6 +103,31 @@ public class Purchase {
         } else {
             System.out.println("Please add more money or select a different product.");
         }
+    }
+
+    public static void createChange(){
+        MathContext m = new MathContext(0);
+        change = getMoneyProvided();
+
+        quarters = new BigDecimal(String.valueOf(change.divide(QUARTER))).setScale(0, RoundingMode.FLOOR);
+        change = change.subtract(new BigDecimal(String.valueOf(quarters.multiply(QUARTER))));
+
+        if (change.compareTo(DIME) > 0){
+            dimes = change.divide(DIME).setScale(0, RoundingMode.FLOOR);
+            change = change.subtract(new BigDecimal(String.valueOf(dimes.multiply(DIME))));
+        }
+
+        if (change.compareTo(NICKEL) > 0) {
+            nickels = new BigDecimal(String.valueOf(change.divide(NICKEL))).setScale(0, RoundingMode.FLOOR);
+            change = change.subtract(new BigDecimal(String.valueOf(nickels.multiply(NICKEL))));
+        }
+
+        if (change.compareTo(PENNY) > 0) {
+            pennies = new BigDecimal(String.valueOf(change.divide(PENNY))).setScale(0, RoundingMode.FLOOR);
+            change = change.subtract(new BigDecimal(String.valueOf(pennies.multiply(PENNY))));
+        }
+
+        System.out.println("Your change is:\n" + quarters + " quarters\n" + dimes + " dimes\n" + nickels + " nickels\n" + pennies + " pennies");
     }
 
 }

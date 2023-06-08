@@ -26,12 +26,11 @@ public class VendingMachineCLI {
 	}
 
 	public void run() {
+		Inventory.readFile();
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-				// display vending machine items
-				Inventory.readFile();
 				// if getquantityremaining is 0, set to sold out
 				Inventory.printInventory();
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
@@ -49,7 +48,7 @@ public class VendingMachineCLI {
 
 
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
-
+						Purchase.createChange();
 					}
 
 				}
