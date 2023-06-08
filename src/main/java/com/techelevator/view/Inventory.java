@@ -1,6 +1,7 @@
 package com.techelevator.view;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,12 +26,18 @@ public class Inventory {
             while (scanner.hasNextLine()){
                 String line = scanner.nextLine();
                 String[] itemStat = line.split("\\|");
-                Item item = new Item(itemStat[0], itemStat[1], Double.parseDouble(itemStat[2]), itemStat[3]);
+                Item item = new Item(itemStat[0], itemStat[1], new BigDecimal(itemStat[2]), itemStat[3]);
                 totalInventory.add(item);
             }
 
         } catch (Exception ex){
             System.out.println("Something went wrong.");
+        }
+    }
+
+    public static void printInventory(){
+        for (Item item : totalInventory){
+            System.out.println(item.getButton() + " " + item.getName() + " $" + item.getPrice() + " " + item.getQuantityRemaining() + " remaining");
         }
     }
 

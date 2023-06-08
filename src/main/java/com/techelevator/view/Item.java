@@ -1,5 +1,6 @@
 package com.techelevator.view;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,18 +8,18 @@ public class Item {
 
     private String button;
     private String name;
-    private double price;
+    private BigDecimal price;
     private String category;
     private int quantityRemaining = 5;
 
-    public Item(String button, String name, double price, String category){
+    public Item(String button, String name, BigDecimal price, String category){
         this.button = button;
         this.name = name;
         this.price = price;
         this.category = category;
     }
 
-    public Item(String button, String name, double price, String category, int quantityRemaining){
+    public Item(String button, String name, BigDecimal price, String category, int quantityRemaining){
         this.button = button;
         this.name = name;
         this.price = price;
@@ -34,7 +35,7 @@ public class Item {
         return name;
     }
 
-    public double getPrice(){
+    public BigDecimal getPrice(){
         return price;
     }
 
