@@ -43,7 +43,9 @@ public class VendingMachineCLI {
 						Purchase.feedMoney();
 
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
-						Purchase.selectItem();
+						Item itemToPurchase = Purchase.selectItem();
+						boolean canPurchaseItem = Purchase.purchaseItem(itemToPurchase);
+						Purchase.updateInventory(itemToPurchase, canPurchaseItem);
 
 
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
