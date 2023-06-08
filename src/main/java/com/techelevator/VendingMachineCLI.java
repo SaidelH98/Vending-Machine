@@ -1,5 +1,7 @@
 package com.techelevator;
 
+import com.techelevator.view.Inventory;
+import com.techelevator.view.Item;
 import com.techelevator.view.Menu;
 
 public class VendingMachineCLI {
@@ -28,8 +30,15 @@ public class VendingMachineCLI {
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				// display vending machine items
+				Inventory.readFile();
+				for (Item item : Inventory.totalInventory){
+					System.out.println(item.getButton() + " " + item.getName() + " " + item.getPrice() + " " + item.getQuantityRemaining() + " remaining");
+				}
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
+			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
+				System.out.println("Goodbye!");
+				break;
 			}
 		}
 	}
