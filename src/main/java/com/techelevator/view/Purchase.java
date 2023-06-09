@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Purchase {
 
-    private static BigDecimal moneyProvided;
+    private static BigDecimal moneyProvided = new BigDecimal("0.00");
     private static BigDecimal change;
 
     public static File file = new File("./log.txt");
@@ -43,9 +43,10 @@ public class Purchase {
                 System.out.print("\nPlease enter a dollar amount >>> $");
                 String moneyStr = scanner.next();
                 BigDecimal money = new BigDecimal(moneyStr);
-                setMoneyProvided(money);
-                System.out.println("You inserted $" + money);
-                logTransaction("FEED MONEY", money, getMoneyProvided());
+                System.out.println("You inserted $" + money.setScale(2));
+                setMoneyProvided(money.add(getMoneyProvided()));
+                logTransaction("FEED MONEY", money.setScale(2), getMoneyProvided());
+
                 shouldRun = false;
             } catch (Exception ex){
                 System.out.println("Please enter a valid dollar amount.");
@@ -70,7 +71,7 @@ public class Purchase {
                     return item;
                 }
             }
-            System.out.println("Please enter a valid item code.");
+            System.out.println("Please enter a valid item code");
         }
     }
 
@@ -124,7 +125,7 @@ public class Purchase {
     }
 
     public static void logTransaction(String transactionType, BigDecimal dollarAmount, BigDecimal moneyRemaining){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss a");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a");
         LocalDateTime now = LocalDateTime.now();
 
         try (FileWriter dataOutput = new FileWriter(file, true)){

@@ -37,7 +37,11 @@ public class Inventory {
 
     public static void printInventory(){
         for (Item item : totalInventory){
-            System.out.println(item.getButton() + " " + item.getName() + " $" + item.getPrice() + " " + item.getQuantityRemaining() + " remaining");
+            if (item.getQuantityRemaining() == 0){
+                System.out.println(item.getButton() + " " + item.getName() + " $" + item.getPrice() + " SOLD OUT");
+            } else {
+                System.out.println(item.getButton() + " " + item.getName() + " $" + item.getPrice() + " " + item.getQuantityRemaining() + " remaining");
+            }
         }
     }
 
