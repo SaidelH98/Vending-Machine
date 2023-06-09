@@ -60,8 +60,12 @@ public class Purchase {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.print("Please enter an item code >>> ");
+            System.out.print("\nPlease enter an item code or enter 1 to exit >>> ");
             String itemSelected = scanner.nextLine();
+            if (itemSelected.equals("1")) {
+                createChange();
+                System.exit(0);
+            }
             for (Item item : Inventory.totalInventory){
                 if (item.getButton().equalsIgnoreCase(itemSelected)){
                     if (item.getQuantityRemaining() == 0){
@@ -71,7 +75,7 @@ public class Purchase {
                     return item;
                 }
             }
-            System.out.println("Please enter a valid item code");
+            System.out.println("Please enter a valid item code or enter 1 to exit.");
         }
     }
 
@@ -80,8 +84,8 @@ public class Purchase {
             System.out.println("Not enough money to purchase item.");
             return false;
         }
-        System.out.println("Item selected is:");
-        System.out.println(item.getName() + " $" + item.getPrice() + " $" + getMoneyProvided());
+        System.out.print("Item selected is: ");
+        System.out.println(item.getName() + " | Price $" + item.getPrice() + " | Current Balance $" + getMoneyProvided());
         if (item.getCategory().equals("Chip")){
             System.out.println("Crunch Crunch, Yum!");
         } else if (item.getCategory().equals("Candy")){
@@ -102,8 +106,8 @@ public class Purchase {
         if (canPurchaseItem){
             setMoneyProvided(getMoneyProvided().subtract(item.getPrice()));
             item.setQuantityRemaining(item.getQuantityRemaining() - 1);
-            System.out.println("Item Dispensed.");
-            System.out.println("You have $" + getMoneyProvided() + " left");
+            System.out.println("[Item Dispensed]");
+            System.out.println("You have $" + getMoneyProvided() + " left.");
         } else {
             System.out.println("Please add more money or select a different product.");
         }
