@@ -2,10 +2,7 @@ package com.techelevator.view;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -55,8 +52,7 @@ public class Purchase {
     }
 
     public static Item selectItem(){
-        //Inventory.readFile();
-        Inventory.printInventory();
+        System.out.println(Inventory.printInventory());
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
