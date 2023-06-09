@@ -46,7 +46,8 @@ public class VendingMachineCLI {
 						Purchase.updateInventory(itemToPurchase, canPurchaseItem);
 
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
-						Purchase.createChange();
+						String change = Purchase.createChange();
+						System.out.println(change);
 						break;
 					}
 

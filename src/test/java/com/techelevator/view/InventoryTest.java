@@ -1,19 +1,16 @@
 package com.techelevator.view;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 
 public class InventoryTest {
 
     @Test
-    public void valid_singleInput() {
+    public void test_printInventory() {
 
-        final String expectedOutput = "1000";
+        Inventory.readFile();
+
+        final String expectedOutput = "B3 Wonka Bar $1.50 5 remaining ";
 
         String testString = Inventory.printInventory();
 
