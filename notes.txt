@@ -3,3 +3,5 @@
 3) Maybe add a way to exit from select product if the customer declines buying?
 4) Add log.txt
 5) Make Sales Report
+6) Fix feed money bug when user inputs too many decimals
+7) Fix bug when you try to purchase an item with no money in the machine

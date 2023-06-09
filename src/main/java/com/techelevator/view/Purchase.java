@@ -1,14 +1,21 @@
 package com.techelevator.view;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Purchase {
 
     private static BigDecimal moneyProvided;
     private static BigDecimal change;
+
+    public static File file = new File("./log.txt");
 
     public static BigDecimal getMoneyProvided() {
         return moneyProvided;
@@ -29,6 +36,7 @@ public class Purchase {
     public static void feedMoney(){
         Scanner scanner = new Scanner(System.in);
 
+        //fix bug when inserting $1.339 too many decimals on input
         boolean shouldRun = true;
         while (shouldRun) {
             try {
@@ -37,6 +45,7 @@ public class Purchase {
                 BigDecimal money = new BigDecimal(moneyStr);
                 setMoneyProvided(money);
                 System.out.println("You inserted $" + money);
+                logTransaction("FEED MONEY", money, getMoneyProvided());
                 shouldRun = false;
             } catch (Exception ex){
                 System.out.println("Please enter a valid dollar amount.");
@@ -81,6 +90,10 @@ public class Purchase {
         } else if (item.getCategory().equals("Gum")){
             System.out.println( "Chew Chew, Yum!");
         }
+        //writes purchase to log
+        String formatToLog = item.getName() + " " + item.getButton();
+        logTransaction(formatToLog, item.getPrice(), getMoneyProvided().subtract(item.getPrice()));
+
         return true;
     }
 
@@ -106,6 +119,19 @@ public class Purchase {
         int nickels = (int)(Math.floor(intChange / 5));
         intChange %= 5;
         System.out.println("Your change is " + quarters + " quarters, " + dimes + " dime, " + nickels + " nickels, and " + intChange + " pennies.");
+        //writes to log
+        logTransaction("GIVE CHANGE", change, new BigDecimal(0));
     }
 
+    public static void logTransaction(String transactionType, BigDecimal dollarAmount, BigDecimal moneyRemaining){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss a");
+        LocalDateTime now = LocalDateTime.now();
+
+        try (FileWriter dataOutput = new FileWriter(file, true)){
+            dataOutput.append("\n" + dtf.format(now) + " " + transactionType + ": $" + dollarAmount + " $" + moneyRemaining);
+
+        } catch (Exception ex) {
+            System.out.println("Something went wrong.");
+        }
+    }
 }
