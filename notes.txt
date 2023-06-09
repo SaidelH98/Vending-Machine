@@ -1,0 +1,5 @@
+1) Make sure that if an item is out of stock it should say SOLD OUT instead of 0 items remaining
+2) Feed money should be adding money, if there is 8.75, if I feed $10 it should say 18.75 not 10
+3) Maybe add a way to exit from select product if the customer declines buying?
+4) Add log.txt
+5) Make Sales Report
