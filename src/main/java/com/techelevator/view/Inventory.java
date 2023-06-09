@@ -12,7 +12,6 @@ public class Inventory {
     private static String inventoryPath = "C:\\Users\\Student\\workspace\\nlr-14-module-1-capstone-team-5\\vendingmachine.csv";
     private static File inventoryFile = new File(inventoryPath);
 
-
     public static void readFile(){
         if (!inventoryFile.exists()){
             System.out.println(inventoryPath + " does not exist.");
