@@ -30,8 +30,7 @@ public class VendingMachineCLI {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-				// if getquantityremaining is 0, set to sold out
-				Inventory.printInventory();
+				System.out.println(Inventory.printInventory());
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
 				while (true) {
@@ -46,7 +45,8 @@ public class VendingMachineCLI {
 						Purchase.updateInventory(itemToPurchase, canPurchaseItem);
 
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
-						Purchase.createChange();
+						String change = Purchase.createChange();
+						System.out.println(change);
 						break;
 					}
 

@@ -34,13 +34,15 @@ public class Inventory {
         }
     }
 
-    public static void printInventory(){
+    public static String printInventory(){
+        String inventoryInfo = "";
         for (Item item : totalInventory){
             if (item.getQuantityRemaining() == 0){
-                System.out.println(item.getButton() + " " + item.getName() + " $" + item.getPrice() + " SOLD OUT");
+                inventoryInfo += item.getButton() + " " + item.getName() + " $" + item.getPrice() + " SOLD OUT \n";
             } else {
-                System.out.println(item.getButton() + " " + item.getName() + " $" + item.getPrice() + " " + item.getQuantityRemaining() + " remaining");
+                inventoryInfo += item.getButton() + " " + item.getName() + " $" + item.getPrice() + " " + item.getQuantityRemaining() + " remaining \n";
             }
         }
+        return inventoryInfo;
     }
 }
