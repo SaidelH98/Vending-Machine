@@ -41,8 +41,12 @@ public class VendingMachineCLI {
 
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
 						Item itemToPurchase = Purchase.selectItem();
-						boolean canPurchaseItem = Purchase.purchaseItem(itemToPurchase);
-						Purchase.updateInventory(itemToPurchase, canPurchaseItem);
+
+						if (itemToPurchase != null){
+							boolean canPurchaseItem = Purchase.purchaseItem(itemToPurchase);
+							Purchase.updateInventory(itemToPurchase, canPurchaseItem);
+						}
+
 
 					} else if (purchaseChoice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
 						String change = Purchase.createChange();

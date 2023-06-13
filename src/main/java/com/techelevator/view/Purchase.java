@@ -59,8 +59,9 @@ public class Purchase {
             System.out.print("\nPlease enter an item code or enter 1 to exit >>> ");
             String itemSelected = scanner.nextLine();
             if (itemSelected.equals("1")) {
-                createChange();
-                System.exit(0);
+                System.out.println(createChange());
+                return null;
+                //System.exit(0);
             }
             for (Item item : Inventory.totalInventory){
                 if (item.getButton().equalsIgnoreCase(itemSelected)){
@@ -121,6 +122,7 @@ public class Purchase {
         int nickels = (int)(Math.floor(intChange / 5));
         intChange %= 5;
         returnString = "Your change is " + quarters + " quarters, " + dimes + " dime, " + nickels + " nickels, and " + intChange + " pennies.";
+        setMoneyProvided(new BigDecimal("0.00"));
         //writes to log
         logTransaction("GIVE CHANGE", change, new BigDecimal(0));
         return returnString;
